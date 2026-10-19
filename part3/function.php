@@ -1,12 +1,55 @@
 <?php
 
-// 1. function dasar + return
-function tambah( int $a, int $b): int {
-    return $a + $b;
+class Event
+{
+    public string $idEvent;
+    public string $nameEvent;
 }
 
-$angka1 = (int) readline("Masukan angka Pertama : ");
-$angka2 = (int) readline("Masukan angka Kedua : ");
+class Mahasiswa
+{
+    public string $name;
+    public string $nim;
+    public string $prodi;
+    public string $semester;
+}
 
-$hasil = tambah($angka1, $angka2);
-echo "Hasil : $angka1 + $angka2 = $hasil\n";
+class Panitia
+{
+    public string $namePanitia;
+    public string $upEvent;
+}
+
+class Admin
+{
+    public string $nameAdmin;
+    public bool $perizinan = false;
+
+    public function persetujuan(): string
+    {
+        if ($this->perizinan === true) {
+            return "Admin memberi izin";
+        }
+        return "Admin menolak pendaftaran";
+    }
+}
+
+class Info
+{
+    public function tampil(Mahasiswa $mhs, Event $event, Admin $admin): string
+    {
+        return "{$mhs->name} mengikuti kepanitiaan {$event->nameEvent}. "
+             . $admin->persetujuan();
+    }
+}
+
+$event = new Event();
+$mhs   = new Mahasiswa();
+$admin = new Admin();
+$info  = new Info();
+
+$event->nameEvent = "LDKK";
+$mhs->name        = "Andi";
+$admin->perizinan = true;
+
+echo $info->tampil($mhs, $event, $admin);

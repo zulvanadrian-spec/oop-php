@@ -11,35 +11,39 @@ class Hero {
 
     public const ATTACK_PER_LEVEL = 100;
     public const HP_PER_LEVEL = 200;
-}
 
-function gainExp(Hero $hero, int $addExp): void {
-    $hero->exp += $addExp;
+    public function gainExp(Hero $hero, int $addExp){
+        $hero->exp += $addExp;
 
-    while ($hero->exp >= 100) {
-        $hero->exp -= 100;
-        levelUp($hero);
+        while ($hero->exp >= 100) {
+            $hero->exp -= 100;
+            levelUp($hero);
     }
 }
 
-function levelUp(Hero $hero): void {
-    $hero->level++;
-    $hero->attack += Hero::ATTACK_PER_LEVEL;
-    $hero->hp += Hero::HP_PER_LEVEL;
+    public function levelUp(Hero $hero): void {
+        $hero->level++;
+        $hero->attack += Hero::ATTACK_PER_LEVEL;
+        $hero->hp += Hero::HP_PER_LEVEL;
+        
+    }
+
+    public function info() {
+        return
+        "$hero->name <br>";
+        "Tipe : $hero->typeHero <br>";
+        "HP : $hero->hp <br>";
+        "Attack : $hero->attack <br>";
+        "Level : $hero->level <br>";
+        "Exp : $hero->exp <br>";
+    }
+
 }
 
-$hero = new Hero();
+$beatrix = new Hero();
+$beatrix->name = "Beatrix";
+$beatrix->typehero = "Marksman";
+$beatrix->hp = 4000;
+$beatrix->attack = 900;
 
-$hero->name = "Beatrix";
-$hero->typeHero = "Marksman";
-$hero->hp = 4000;
-$hero->attack = 1500;
-
-gainExp($hero, 100);
-
-echo "Nama : $hero->name <br>";
-echo "Tipe : $hero->typeHero <br>";
-echo "HP : $hero->hp <br>";
-echo "Attack : $hero->attack <br>";
-echo "Level : $hero->level <br>";
-echo "Exp : $hero->exp <br>";
+$beatrix->info();
